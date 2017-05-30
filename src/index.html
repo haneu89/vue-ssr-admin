@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js SSR Template</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="icon" href="public/favicon.ico" sizes="16x16">
+    <% if(htmlWebpackPlugin.options.environment === 'production') { %>
+    <% for(key in htmlWebpackPlugin.files.css){ %>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[key] %>">
+    <% } %>
+    <% } %>
+
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/public/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/public/css/skin-blue.min.css">
+    <link rel="stylesheet" href="/public/js/plugins/pace/pace.min.css">
+
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <noscript id="deferred-styles"></noscript>
+    <!-- placeholder -->
+    {{ APP }}
+    <script>
+      var loadDeferredStyles = function() { var e = document.getElementById("deferred-styles"),t = document.head.getElementsByTagName("meta");t[t.length - 1].insertAdjacentHTML("afterend", e.textContent);e.parentElement.removeChild(e) }
+      var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame; raf ? raf(function() { window.setTimeout(loadDeferredStyles, 0) }) : window.addEventListener("load", loadDeferredStyles);
+    </script>
+    <% if(htmlWebpackPlugin.options.environment === 'production') { %>
+    <% for(key in htmlWebpackPlugin.files.js){ %>
+    <script defer src="<%= htmlWebpackPlugin.files.js[key] %>"></script>
+    <% } %>
+    <% } %>
+    <script src="/public/js/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="/public/js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="/public/js/plugins/AdminLTE/app.min.js"></script>
+    <script src="/public/js/plugins/pace/pace.min.js"></script>
+  </body>
+
+</html>
