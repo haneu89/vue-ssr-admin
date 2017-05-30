@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(favicon('./public/favicon.ico'))
 
-app.use('/admin', require('./admin/base'))
+app.use('/api/admin', require('./admin/base'))
 app.use('/api', require('./api/index'))
 
 module.exports = app

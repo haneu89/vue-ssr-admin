@@ -3,6 +3,7 @@ import App from './App.vue'
 import store from './store/index'
 import router from './router/index'
 import { sync } from 'vuex-router-sync'
+import axios from 'axios'
 
 // Import Helpers for filters
 import { domain, count, prettyDate, pluralize } from './filters'
@@ -12,6 +13,8 @@ Vue.filter('count', count)
 Vue.filter('domain', domain)
 Vue.filter('prettyDate', prettyDate)
 Vue.filter('pluralize', pluralize)
+
+Vue.prototype.$http = axios.create()
 
 sync(store, router)
 

@@ -10,20 +10,20 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+            <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="pageTitle" class="col-sm-2 control-label">홈페이지 제목</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="pageTitle" placeholder="myhome">
+                    <input type="text" class="form-control" id="pageTitle" placeholder="myhome" v-model="items.title">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="pateMeta" class="col-sm-2 control-label">메타태그 설정</label>
 
                   <div class="col-sm-10">
-                    <textarea class="form-control" rows="6" id="pateMeta"></textarea>
+                    <textarea class="form-control" rows="6" id="pateMeta" v-model="items.meta"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -39,10 +39,10 @@
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-info pull-right">Save</button>
+                <button class="btn btn-info pull-right" @click="saveTitleMeta"  >Save</button>
               </div>
               <!-- /.box-footer -->
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+            <div class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="pateMeta" class="col-sm-2 control-label">개인정보 취급방침</label>
@@ -70,7 +70,7 @@
                 <button type="submit" class="btn btn-info pull-right">Save</button>
               </div>
               <!-- /.box-footer -->
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -80,9 +80,33 @@
 <script>
 export default {
   name: 'BaseTitle',
+  data () {
+    return {
+      items: {
+        title: null,
+        meta: null
+      }
+    }
+  },
   computed: {
     datetime () {
       return new Date()
+    }
+  },
+  created () {
+    this.fetchData()
+  },
+  methods: {
+    fetchData () {
+      this.$http.get('/api/admin/test')
+      .then(res => {
+        console.log(res)
+        this.items = res.data
+      })
+    },
+    saveTitleMeta () {
+      this.$http.put('/api/admin/test', this.items)
+      .then(res => console.log(res))
     }
   }
 }
