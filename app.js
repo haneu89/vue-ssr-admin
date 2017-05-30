@@ -4,16 +4,13 @@ const isProd = process.env.NODE_ENV === 'production'
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
-const compression = require('compression')
 const serialize = require('serialize-javascript')
-const favicon = require('serve-favicon')
 const lru = require('lru-cache')
 const vueRenderer = require('vue-server-renderer')
 const devServer = require('./build/dev-server')
-const bodyParser = require('body-parser')
 const resolve = file => path.resolve(__dirname, file)
 
-const app = express()
+const app = require('./server/server')
 
 const createRenderer = bundle => {
   // https://github.com/isaacs/node-lru-cache#options
@@ -65,13 +62,8 @@ if (isProd) {
   })
 }
 
-app.use(compression({ threshold: 0 }))
-app.use(favicon('./public/favicon.ico'))
 app.use('/dist', serve('./dist'))
 app.use('/public', serve('./public'))
-app.use('/api', require('./server/api/index'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 // 모든 GET 요청에 대해 처리
 app.get('*', (req, res) => {
   if (!renderer) {
@@ -108,7 +100,7 @@ app.get('*', (req, res) => {
   })
 
   renderStream.on('error', err => {
-    if (err && err.code == '404') {
+    if (err && err.code === '404') {
       res.status(404).end('404, Page Not Found')
       return
     }
