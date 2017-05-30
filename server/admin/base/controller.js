@@ -1,0 +1,2 @@
+exports.getTitle = (req, res) => {
+}

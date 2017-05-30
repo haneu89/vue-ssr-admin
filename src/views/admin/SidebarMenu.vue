@@ -1,11 +1,30 @@
 <template>
   <ul class="sidebar-menu">
+    <li class="header">기본 설정</li>
+    <li class="active pageLink" v-on:click="toggleMenu">
+      <router-link to="/admin/title"><i class="fa fa-desktop"></i>
+        <span class="page">타이틀 및 주소창 설정</span>
+      </router-link>
+    </li>
+    <li class="active pageLink" v-on:click="toggleMenu">
+      <router-link to="/admin"><i class="fa fa-desktop"></i>
+        <span class="page">약관 관리</span>
+      </router-link>
+    </li>
+    <li class="header">게시물 관리</li>
+    <li class="active pageLink" v-on:click="toggleMenu">
+      <router-link to="/admin"><i class="fa fa-desktop"></i>
+        <span class="page">공지사항 관리</span>
+      </router-link>
+    </li>
+    <li class="header">접속 통계</li>
     <li class="header">TOOLS</li>
     <li class="active pageLink" v-on:click="toggleMenu">
-      <router-link to="/"><i class="fa fa-desktop"></i>
+      <router-link to="/admin"><i class="fa fa-desktop"></i>
         <span class="page">Dashboard</span>
       </router-link>
     </li>
+
     <li class="pageLink" v-on:click="toggleMenu">
       <router-link to="/tables"><i class="fa fa-table"></i>
         <span class="page">Tables</span>

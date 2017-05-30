@@ -10,6 +10,7 @@ const favicon = require('serve-favicon')
 const lru = require('lru-cache')
 const vueRenderer = require('vue-server-renderer')
 const devServer = require('./build/dev-server')
+const bodyParser = require('body-parser')
 const resolve = file => path.resolve(__dirname, file)
 
 const app = express()
@@ -69,6 +70,8 @@ app.use(favicon('./public/favicon.ico'))
 app.use('/dist', serve('./dist'))
 app.use('/public', serve('./public'))
 app.use('/api', require('./server/api/index'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 // 모든 GET 요청에 대해 처리
 app.get('*', (req, res) => {
   if (!renderer) {

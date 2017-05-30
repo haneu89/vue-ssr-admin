@@ -7,6 +7,7 @@ import View2 from '../views/View2.vue'
 import UserView from '../views/UserView.vue'
 import DashView from '../views/admin/Dash.vue'
 import Dashboard from '../views/admin/views/Dashboard.vue'
+import BaseTitle from '../views/admin/base/BaseTitle.vue'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export default new Router({
     { path: '/view1', component: View1 },
     { path: '/view2', component: View2 },
     { path: '/users/:id', component: UserView },
-    { path: '/admin', component: DashView, children: [ { path: '/', component: Dashboard } ] }
+    { path: '/admin',
+      component: DashView,
+      children: [
+      { path: '/', component: Dashboard },
+      { path: 'title', component: BaseTitle }
+      ] }
   ]
 })
