@@ -8,6 +8,7 @@ import UserView from '../views/UserView.vue'
 import DashView from '../views/admin/Dash.vue'
 import Dashboard from '../views/admin/views/Dashboard.vue'
 import BaseTitle from '../views/admin/base/BaseTitle.vue'
+import Connection from '../views/admin/stats/Connection.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,7 @@ export default new Router({
       component: DashView,
       children: [
       { path: '/', component: Dashboard },
+      { path: 'stat', component: Connection },
       { path: 'title', component: BaseTitle }
       ] }
   ]

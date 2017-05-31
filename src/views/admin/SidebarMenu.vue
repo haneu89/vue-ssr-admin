@@ -7,8 +7,8 @@
       </router-link>
     </li>
     <li class="active pageLink" v-on:click="toggleMenu">
-      <router-link to="/admin"><i class="fa fa-desktop"></i>
-        <span class="page">약관 관리</span>
+      <router-link to="/admin/stat"><i class="fa fa-desktop"></i>
+        <span class="page">접속자 통계</span>
       </router-link>
     </li>
     <li class="header">게시물 관리</li>
